@@ -16,7 +16,7 @@ composer require digilopment/n8n-client
 
 ## Configuration
 
-Create a `.env` file in your project root:
+Create a `.env` file in your project root (where your `composer.json` is located):
 
 ```env
 N8N_BASE_URL=https://your-n8n-instance.com
@@ -24,7 +24,7 @@ N8N_BEARER_TOKEN=your_bearer_token_here
 N8N_ENVIRONMENT=production
 ```
 
-Or use `.env.example` as a template.
+The `.env` file is **automatically loaded** when you use the Config class - no need to manually load it with Dotenv or bootstrap files.
 
 ## Usage
 
