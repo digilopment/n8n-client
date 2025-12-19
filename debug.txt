@@ -1,6 +1,0 @@
-Array
-(
-    [title] => Úvod do programovania
-    [description] => Základy pre začiatočníkov.
-    [content] => <p>Programovanie je proces písania inštrukcií pre počítače.</p>
-)
