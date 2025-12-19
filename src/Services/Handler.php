@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace Digilopment\N8NClient\Services;
 
 class Handler
 {

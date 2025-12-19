@@ -2,7 +2,7 @@
 
 require 'bootstrap.php';
 
-use App\Services\Handler;
+use Digilopment\N8NClient\Services\Handler;
 
 $handler = new Handler();
 $handler->handle('generuj-obsah');

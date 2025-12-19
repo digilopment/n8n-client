@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace Digilopment\N8NClient\Services;
 
-use App\Config;
+use Digilopment\N8NClient\Config;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;

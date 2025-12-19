@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests;
+namespace Digilopment\N8NClient\Tests;
 
-use App\Services\N8NClient;
+use Digilopment\N8NClient\Services\N8NClient;
 use PHPUnit\Framework\TestCase;
 
 class N8NClientTest extends TestCase

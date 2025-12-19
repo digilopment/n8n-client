@@ -1,3 +1,7 @@
-vendor/
+/vendor/
 .env
+.env.local
+composer.lock
+.phpunit.cache
 debug.txt
+*.log
