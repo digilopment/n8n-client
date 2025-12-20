@@ -31,8 +31,21 @@ require 'vendor/autoload.php';
 
 use Digilopment\N8NClient\Services\Handler;
 
-$handler = new Handler();
-$handler->handle('generuj-obsah');
+$data = [
+    'tema' => $_POST['tema'] ?? null,
+];
+
+$errorData = [
+    'message' => 'Chyba pri generovaní',
+    'details' => null,
+];
+
+(new Handler())
+    ->setData($data)
+    ->handleJson('generuj-obsah')
+    ->getAll()
+    ->ifError($errorData)
+    ->getData();
 ```
 
 ### Frontend (index.html)
@@ -89,20 +102,31 @@ $handler->handle('generuj-obsah');
             resultDiv.style.display = 'none';
 
             try {
+                const formData = new FormData();
+                formData.append('tema', topic);
+
                 const response = await fetch('ajax.php', {
                     method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ tema: topic })
+                    body: formData
                 });
                 if (!response.ok) throw new Error('Server neodpovedá (HTTP ' + response.status + ')');
-                const data = await response.json();
+                
+                const responseData = await response.json();
 
-                const content = Array.isArray(data) ? data[0] : data;
-                let finalContent = content;
-                if (typeof content === 'string') {
-                    finalContent = JSON.parse(content);
+                let finalContent = {};
+
+                // Nový formát: {data: {...}, type: 'json'} alebo {data: '...', type: 'text'}
+                if (responseData.type === 'json' && responseData.data) {
+                    finalContent = responseData.data;
+                } else if (responseData.type === 'text' && responseData.data) {
+                    finalContent = {
+                        title: 'Odpoveď',
+                        description: '',
+                        content: '<p>' + responseData.data + '</p>'
+                    };
+                } else {
+                    const content = Array.isArray(responseData) ? responseData[0] : responseData;
+                    finalContent = typeof content === 'string' ? JSON.parse(content) : content;
                 }
 
                 document.getElementById('res-title').innerText = finalContent.title || 'Bez názvu';

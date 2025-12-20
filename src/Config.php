@@ -26,10 +26,10 @@ class Config
     {
         $startDir = getcwd() ?: (isset($_SERVER['PWD']) ? $_SERVER['PWD'] : __DIR__);
         $currentDir = $startDir;
-        
+
         $maxDepth = 10;
         $depth = 0;
-        
+
         while ($currentDir !== '/' && $currentDir !== '' && $depth < $maxDepth) {
             if (file_exists($currentDir . '/composer.json') || file_exists($currentDir . '/.env')) {
                 return $currentDir;
